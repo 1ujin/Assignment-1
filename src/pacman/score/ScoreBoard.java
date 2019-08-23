@@ -49,9 +49,8 @@ public class ScoreBoard {
                 public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
                     if (o1.getValue() > o2.getValue()) {
                         return -1;
-                    // Throw java.lang.NumberFormatException
-                    // } else if (o1.getValue() == o2.getValue() && Long.valueOf(o1.getKey()) > Long.valueOf(o2.getKey())) {
-                    //     return -1;
+                    } else if (o1.getValue() == o2.getValue() && o1.getKey().compareTo(o2.getKey()) < 0) {
+                        return -1;
                     }
                     return 1;
                 }

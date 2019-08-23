@@ -1,11 +1,12 @@
 package pacman.hunter;
 
+import pacman.game.Entity;
 import pacman.ghost.Ghost;
 import pacman.ghost.Phase;
 import pacman.util.Direction;
 import pacman.util.Position;
 
-public abstract class Hunter {
+public abstract class Hunter extends Entity {
     protected HunterType type;
     protected Position position;
     protected Direction direction;
@@ -39,12 +40,12 @@ public abstract class Hunter {
     }
 
     public void activateSpecial​(int duration) {
-        if (this.specialActive == false) {
+        if (!isSpecialActive()) {
             this.specialActive = true;
         }
 
         if (duration >= 0) {
-            this.specialDurationRemaining = duration;
+            this.specialDurationRemaining -= duration;
         }
     }
 
@@ -60,5 +61,13 @@ public abstract class Hunter {
                 this.dead = true;
             }
         }
+    }
+
+    public void reset() {
+        this.position = new Position(0, 0);
+        this.direction = Direction.UP;
+        this.specialActive = false;
+        this.specialDurationRemaining = 0;
+        this.dead = false;
     }
 }
